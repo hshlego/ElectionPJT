@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CandidateRepository {
 
-    private EntityManager em;
+    private final EntityManager em;
 
     public void save(Candidate candidate) {
         em.persist(candidate);

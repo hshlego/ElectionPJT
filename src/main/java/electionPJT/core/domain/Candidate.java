@@ -33,13 +33,9 @@ public class Candidate {
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<Youtube> youtubeList = new ArrayList<>();
 
-    public Candidate(int number, String name, City city) {
+    public Candidate(City city, int number, String name) {
+        this.city = city;
         this.number = number;
         this.name = name;
-        this.city = city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
     }
 }

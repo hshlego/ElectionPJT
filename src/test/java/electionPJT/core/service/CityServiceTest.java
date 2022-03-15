@@ -19,6 +19,9 @@ class CityServiceTest {
     @Autowired CityRepository cityRepository;
     @Autowired CityService cityService;
 
+    /**
+     * 도시 추가
+     */
     @Test
     public void join() throws Exception {
         //given
@@ -32,6 +35,9 @@ class CityServiceTest {
         assertEquals(city1, cityRepository.findOne(cityId));
     }
 
+    /**
+     * 도시 찾기
+     */
     @Test
     public void 구역으로_찾기() throws Exception {
         //given
@@ -42,6 +48,6 @@ class CityServiceTest {
         cityService.join(city1);
 
         //then
-        assertEquals(city1, cityRepository.findByDistrict(district));
+        assertEquals(city1, cityRepository.findByDistrict(district).get());
     }
 }

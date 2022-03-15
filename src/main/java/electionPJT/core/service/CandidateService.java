@@ -19,20 +19,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CandidateService {
 
-    @Autowired EntityManager em;
     private final CityRepository cityRepository;
     private final CandidateRepository candidateRepository;
 
     @Transactional
-    public Long addCandidate(String GSS_1, String GSS_2, String GSS_3, int number, String name) {
-        District district = new District(GSS_1, GSS_2, GSS_3);
-        City city = cityRepository.findByDistrict(district);
-
-        validateDuplicateCandidate(city, number);
-
-        Candidate candidate = new Candidate(number, name, city);
+    public Long join(Candidate candidate) {
+        validateDuplicateCandidate(candidate.getCity(), candidate.getNumber());
         candidateRepository.save(candidate);
-
         return candidate.getId();
     }
 
