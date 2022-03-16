@@ -18,7 +18,7 @@ public class Survey {
     @Column(name = "survey_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
 

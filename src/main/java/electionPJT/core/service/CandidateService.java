@@ -2,16 +2,13 @@ package electionPJT.core.service;
 
 import electionPJT.core.domain.Candidate;
 import electionPJT.core.domain.City;
-import electionPJT.core.domain.District;
-import electionPJT.core.exception.DuplicateCandidateException;
+import electionPJT.core.dto.candidate.CandidateRequestDto;
 import electionPJT.core.repository.CandidateRepository;
 import electionPJT.core.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
@@ -23,16 +20,35 @@ public class CandidateService {
     private final CandidateRepository candidateRepository;
 
     @Transactional
-    public Long join(Candidate candidate) {
-        validateDuplicateCandidate(candidate.getCity(), candidate.getNumber());
+    public Long join(CandidateRequestDto candidateRequestDto) {
+        Long cityId = candidateRequestDto.getCityId();
+        City city = cityRepository.findOne(cityId);
+
+        Candidate candidate = candidateRequestDto.toEntity(city);
+
+        validateDuplicateCandidate(candidate);
         candidateRepository.save(candidate);
         return candidate.getId();
     }
 
-    public void validateDuplicateCandidate(City city, int number) {
-        List<Candidate> candidateList = candidateRepository.findByCityIdAndNumber(city, number);
+    @Transactional
+    public void delete(Long candidateId) {
+        Candidate candidate = candidateRepository.findById(candidateId);
+        validateCandidateExistence(candidate);
+        candidateRepository.remove(candidate);
+    }
+
+    public void validateDuplicateCandidate(Candidate candidate) {
+        List<Candidate> candidateList = candidateRepository.findByCityAndNumber(candidate.getCity(), candidate.getNumber());
         if(!candidateList.isEmpty()) {
-            throw new DuplicateCandidateException("이미 존재하는 후보 번호입니다");
+            throw new IllegalStateException("이미 존재하는 후보 번호입니다");
+        }
+    }
+
+    public void validateCandidateExistence(Candidate candidate) {
+        List<Candidate> candidateList = candidateRepository.findByCityAndNumber(candidate.getCity(), candidate.getNumber());
+        if(candidateList.isEmpty()) {
+            throw new IllegalStateException("후보가 존재하지 않습니다.");
         }
     }
 }

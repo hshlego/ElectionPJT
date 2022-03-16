@@ -18,11 +18,21 @@ public class CandidateRepository {
         em.persist(candidate);
     }
 
+    public void remove(Candidate candidate) {
+        em.remove(candidate);
+    }
+
     public Candidate findById(Long id) {
         return em.find(Candidate.class, id);
     }
 
-    public List<Candidate> findByCityIdAndNumber(City city, int number) {
+    public List<Candidate> findAllByCity(City city) {
+        return em.createQuery("select c from Candidate c where c.city = :city")
+                .setParameter("city", city)
+                .getResultList();
+    }
+
+    public List<Candidate> findByCityAndNumber(City city, int number) {
         return em.createQuery("select c from Candidate c where c.city = :city and c.number = :number")
                 .setParameter("city", city)
                 .setParameter("number", number)

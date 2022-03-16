@@ -2,6 +2,7 @@ package electionPJT.core.domain;
 
 import electionPJT.core.domain.sns.Sns;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,9 @@ public class Candidate {
     @Column(name = "candidate_name")
     private String name;
 
+    @Column(name = "candidate_likes")
+    private int likes;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
@@ -33,9 +37,11 @@ public class Candidate {
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<Youtube> youtubeList = new ArrayList<>();
 
-    public Candidate(City city, int number, String name) {
-        this.city = city;
+    @Builder
+    public Candidate(int number, String name, City city) {
         this.number = number;
         this.name = name;
+        this.likes = 0;
+        this.city = city;
     }
 }
