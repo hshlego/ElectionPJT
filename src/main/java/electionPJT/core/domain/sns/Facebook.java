@@ -21,8 +21,8 @@ public class Facebook extends Sns{
     private int shares;
 
     @Builder
-    public Facebook(Candidate candidate, String content, String url, LocalDateTime uploadDate, int likes, int comments, int shares) {
-        super(candidate, content, url, uploadDate);
+    public Facebook(String content, String url, LocalDateTime uploadDate, int likes, int comments, int shares) {
+        super(content, url, uploadDate);
         this.likes = likes;
         this.comments = comments;
         this.shares = shares;

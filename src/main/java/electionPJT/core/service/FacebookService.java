@@ -2,11 +2,13 @@ package electionPJT.core.service;
 
 import electionPJT.core.domain.Candidate;
 import electionPJT.core.domain.sns.Facebook;
+import electionPJT.core.domain.sns.Sns;
 import electionPJT.core.dto.sns.facebook.FacebookResponseDto;
 import electionPJT.core.dto.sns.facebook.FacebookUpdateDto;
 import electionPJT.core.repository.CandidateRepository;
 import electionPJT.core.repository.FacebookRepository;
 import electionPJT.core.dto.sns.facebook.FacebookRequestDto;
+import electionPJT.core.repository.SnsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class FacebookService {
 
     private final FacebookRepository facebookRepository;
+    private final SnsRepository snsRepository;
     private final CandidateRepository candidateRepository;
 
     @Transactional
@@ -27,16 +30,16 @@ public class FacebookService {
         Long candidateId = facebookRequestDto.getCandidateId();
         Candidate candidate = candidateRepository.findById(candidateId);
 
-        Facebook facebook = facebookRequestDto.toEntity(candidate);
-        facebookRepository.save(facebook);
+        Facebook facebook = facebookRequestDto.toEntity();
+        candidate.addSns(facebook);
 
         return facebook.getId();
     }
 
     @Transactional
     public void delete(Long facebookId) {
-        Facebook facebook = facebookRepository.findById(facebookId);
-        facebookRepository.remove(facebook);
+        Sns sns = snsRepository.findById(facebookId);
+        snsRepository.remove(sns);
     }
 
     @Transactional
@@ -54,8 +57,8 @@ public class FacebookService {
         return new FacebookResponseDto(facebook);
     }
 
-    public List<FacebookResponseDto> findFacebookList() {
-        return facebookRepository.findAll().stream()
+    public List<FacebookResponseDto> findFacebookList(Long candidateId) {
+        return facebookRepository.findAllByCandidateId(candidateId).stream()
                 .map(FacebookResponseDto::new)
                 .collect(Collectors.toList());
     }

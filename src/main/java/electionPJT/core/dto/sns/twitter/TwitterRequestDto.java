@@ -22,9 +22,8 @@ public class TwitterRequestDto {
     private int comments;
     private int retweets;
 
-    public Twitter toEntity(Candidate candidate) {
+    public Twitter toEntity() {
         return Twitter.builder()
-                .candidate(candidate)
                 .content(content)
                 .url(url)
                 .uploadDate(uploadDate)

@@ -44,4 +44,10 @@ public class Candidate {
         this.likes = 0;
         this.city = city;
     }
+
+    //== 연관관계 편의 메서드 ==//
+    public void addSns(Sns sns) {
+        snsList.add(sns);
+        sns.setCandidate(this);
+    }
 }

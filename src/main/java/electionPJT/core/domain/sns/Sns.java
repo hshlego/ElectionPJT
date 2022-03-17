@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @DiscriminatorColumn(name = "dtype")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public abstract class Sns {
+public class Sns {
 
     @Id @GeneratedValue
     @Column(name = "sns_id")
@@ -30,10 +30,13 @@ public abstract class Sns {
 
     private LocalDateTime uploadDate;
 
-    public Sns(Candidate candidate, String content, String url, LocalDateTime uploadDate) {
-        this.candidate = candidate;
+    public Sns(String content, String url, LocalDateTime uploadDate) {
         this.content = content;
         this.url = url;
         this.uploadDate = uploadDate;
+    }
+
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
     }
 }

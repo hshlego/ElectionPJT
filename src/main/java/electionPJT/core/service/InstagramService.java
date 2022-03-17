@@ -27,8 +27,8 @@ public class InstagramService {
         Long candidateId = instagramRequestDto.getCandidateId();
         Candidate candidate = candidateRepository.findById(candidateId);
 
-        Instagram instagram = instagramRequestDto.toEntity(candidate);
-        instagramRepository.save(instagram);
+        Instagram instagram = instagramRequestDto.toEntity();
+        candidate.addSns(instagram);
 
         return instagram.getId();
     }
@@ -53,8 +53,8 @@ public class InstagramService {
         return new InstagramResponseDto(instagram);
     }
 
-    public List<InstagramResponseDto> findInstagramList() {
-        return instagramRepository.findAll().stream()
+    public List<InstagramResponseDto> findInstagramList(Long candidateId) {
+        return instagramRepository.findAllByCandidateId(candidateId).stream()
                 .map(InstagramResponseDto::new)
                 .collect(Collectors.toList());
     }

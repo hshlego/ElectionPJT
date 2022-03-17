@@ -25,8 +25,10 @@ public class InstagramRepository {
         return em.find(Instagram.class, id);
     }
 
-    public List<Instagram> findAll() {
-        return em.createQuery("select i from Instagram i", Instagram.class)
+    public List<Instagram> findAllByCandidateId(Long candidateId) {
+        return em.createQuery("select i from Instagram i" +
+                        " where i.candidate.id = :candidateId", Instagram.class)
+                .setParameter("candidateId", candidateId)
                 .getResultList();
     }
 }

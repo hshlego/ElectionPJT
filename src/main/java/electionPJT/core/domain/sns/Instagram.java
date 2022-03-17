@@ -20,8 +20,8 @@ public class Instagram extends Sns{
     private int comments;
 
     @Builder
-    public Instagram(Candidate candidate, String content, String url, LocalDateTime uploadDate, int likes, int comments) {
-        super(candidate, content, url, uploadDate);
+    public Instagram(String content, String url, LocalDateTime uploadDate, int likes, int comments) {
+        super(content, url, uploadDate);
         this.likes = likes;
         this.comments = comments;
     }

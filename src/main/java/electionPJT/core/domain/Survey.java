@@ -1,8 +1,6 @@
 package electionPJT.core.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,13 +29,17 @@ public class Survey {
     @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL)
     private List<Rating> ratings = new ArrayList<>();
 
-    public Survey(LocalDateTime surveyDate, String executor, String requester) {
+    @Builder
+    public Survey(City city, LocalDateTime surveyDate, String executor, String requester) {
+        this.city = city;
         this.surveyDate = surveyDate;
         this.executor = executor;
         this.requester = requester;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    //== 연관관계 편의 메서드 ==//
+    public void addRating(Rating rating) {
+        ratings.add(rating);
+        rating.setSurvey(this);
     }
 }

@@ -1,5 +1,6 @@
 package electionPJT.core.repository;
 
+import electionPJT.core.domain.Candidate;
 import electionPJT.core.domain.sns.Instagram;
 import electionPJT.core.domain.sns.Twitter;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,10 @@ public class TwitterRepository {
         return em.find(Twitter.class, id);
     }
 
-    public List<Twitter> findAll() {
-        return em.createQuery("select t from Twitter t", Twitter.class)
+    public List<Twitter> findAllByCandidateId(Long candidateId) {
+        return em.createQuery("select t from Twitter t" +
+                        " where t.candidate.id = :candidateId", Twitter.class)
+                .setParameter("candidateId", candidateId)
                 .getResultList();
     }
 }

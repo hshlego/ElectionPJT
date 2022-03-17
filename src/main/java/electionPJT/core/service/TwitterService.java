@@ -31,8 +31,8 @@ public class TwitterService {
         Long candidateId = twitterRequestDto.getCandidateId();
         Candidate candidate = candidateRepository.findById(candidateId);
 
-        Twitter twitter = twitterRequestDto.toEntity(candidate);
-        twitterRepository.save(twitter);
+        Twitter twitter = twitterRequestDto.toEntity();
+        candidate.addSns(twitter);
 
         return twitter.getId();
     }
@@ -58,8 +58,8 @@ public class TwitterService {
         return new TwitterResponseDto(twitter);
     }
 
-    public List<TwitterResponseDto> findTwitterList() {
-        return twitterRepository.findAll().stream()
+    public List<TwitterResponseDto> findTwitterList(Long candidateId) {
+        return twitterRepository.findAllByCandidateId(candidateId).stream()
                 .map(TwitterResponseDto::new)
                 .collect(Collectors.toList());
     }

@@ -15,10 +15,7 @@ public class SnsService {
 
     private final SnsRepository snsRepository;
 
-    /**
-     * Sns 전체 조회
-     */
-    public List<Sns> findSnsList() {
-        return snsRepository.findAll();
+    public List<Sns> findSnsList(Long candidateId) {
+        return snsRepository.findAllByCandidateId(candidateId);
     }
 }

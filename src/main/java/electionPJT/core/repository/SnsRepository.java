@@ -13,8 +13,18 @@ public class SnsRepository {
 
     private final EntityManager em;
 
-    public List<Sns> findAll() {
-        return em.createQuery("select s from Sns s", Sns.class)
+    public void remove(Sns sns) {
+        em.remove(sns);
+    }
+
+    public Sns findById(Long id) {
+        return em.find(Sns.class, id);
+    }
+
+    public List<Sns> findAllByCandidateId(Long candidateId) {
+        return em.createQuery("select s from Sns s" +
+                        " where s.candidate.id = :candidateId", Sns.class)
+                .setParameter("candidateId", candidateId)
                 .getResultList();
     }
 }

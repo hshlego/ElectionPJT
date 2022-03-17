@@ -25,8 +25,10 @@ public class FacebookRepository {
         return em.find(Facebook.class, id);
     }
 
-    public List<Facebook> findAll() {
-        return em.createQuery("select f from Facebook f", Facebook.class)
+    public List<Facebook> findAllByCandidateId(Long candidateId) {
+        return em.createQuery("select f from Facebook f" +
+                        " where f.candidate.id = :candidateId", Facebook.class)
+                .setParameter("candidateId", candidateId)
                 .getResultList();
     }
 }

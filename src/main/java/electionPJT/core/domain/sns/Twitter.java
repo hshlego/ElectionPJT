@@ -21,8 +21,8 @@ public class Twitter extends Sns{
     private int retweets;
 
     @Builder
-    public Twitter(Candidate candidate, String content, String url, LocalDateTime uploadDate, int likes, int comments, int retweets) {
-        super(candidate, content, url, uploadDate);
+    public Twitter( String content, String url, LocalDateTime uploadDate, int likes, int comments, int retweets) {
+        super(content, url, uploadDate);
         this.likes = likes;
         this.comments = comments;
         this.retweets = retweets;
