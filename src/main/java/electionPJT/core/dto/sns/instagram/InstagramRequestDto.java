@@ -21,8 +21,9 @@ public class InstagramRequestDto {
     private int likes;
     private int comments;
 
-    public Instagram toEntity() {
+    public Instagram toEntity(Candidate candidate) {
         return Instagram.builder()
+                .candidate(candidate)
                 .content(content)
                 .url(url)
                 .uploadDate(uploadDate)

@@ -28,10 +28,10 @@ public class FacebookService {
     @Transactional
     public Long join(FacebookRequestDto facebookRequestDto) {
         Long candidateId = facebookRequestDto.getCandidateId();
-        Candidate candidate = candidateRepository.findById(candidateId);
+        Candidate candidate = candidateRepository.findOne(candidateId);
 
-        Facebook facebook = facebookRequestDto.toEntity();
-        candidate.addSns(facebook);
+        Facebook facebook = facebookRequestDto.toEntity(candidate);
+        facebookRepository.save(facebook);
 
         return facebook.getId();
     }

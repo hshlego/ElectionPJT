@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @DiscriminatorValue("T")
+@OnDelete(action = OnDeleteAction.CASCADE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Twitter extends Sns{
@@ -21,8 +24,8 @@ public class Twitter extends Sns{
     private int retweets;
 
     @Builder
-    public Twitter( String content, String url, LocalDateTime uploadDate, int likes, int comments, int retweets) {
-        super(content, url, uploadDate);
+    public Twitter(Candidate candidate, String content, String url, LocalDateTime uploadDate, int likes, int comments, int retweets) {
+        super(candidate, content, url, uploadDate);
         this.likes = likes;
         this.comments = comments;
         this.retweets = retweets;

@@ -22,8 +22,9 @@ public class FacebookRequestDto {
     private int comments;
     private int shares;
 
-    public Facebook toEntity() {
+    public Facebook toEntity(Candidate candidate) {
         return Facebook.builder()
+                .candidate(candidate)
                 .content(content)
                 .url(url)
                 .uploadDate(uploadDate)

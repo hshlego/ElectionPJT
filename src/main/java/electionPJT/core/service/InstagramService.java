@@ -25,10 +25,10 @@ public class InstagramService {
     @Transactional
     public Long join(InstagramRequestDto instagramRequestDto) {
         Long candidateId = instagramRequestDto.getCandidateId();
-        Candidate candidate = candidateRepository.findById(candidateId);
+        Candidate candidate = candidateRepository.findOne(candidateId);
 
-        Instagram instagram = instagramRequestDto.toEntity();
-        candidate.addSns(instagram);
+        Instagram instagram = instagramRequestDto.toEntity(candidate);
+        instagramRepository.save(instagram);
 
         return instagram.getId();
     }

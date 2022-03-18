@@ -4,6 +4,8 @@ import electionPJT.core.domain.Candidate;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
 @DiscriminatorColumn(name = "dtype")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Sns {
+public abstract class Sns {
 
     @Id @GeneratedValue
     @Column(name = "sns_id")
@@ -21,6 +23,7 @@ public class Sns {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "candidate_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Candidate candidate;
 
     @Column(columnDefinition = "Text")
@@ -30,13 +33,10 @@ public class Sns {
 
     private LocalDateTime uploadDate;
 
-    public Sns(String content, String url, LocalDateTime uploadDate) {
+    public Sns(Candidate candidate, String content, String url, LocalDateTime uploadDate) {
+        this.candidate = candidate;
         this.content = content;
         this.url = url;
         this.uploadDate = uploadDate;
-    }
-
-    public void setCandidate(Candidate candidate) {
-        this.candidate = candidate;
     }
 }

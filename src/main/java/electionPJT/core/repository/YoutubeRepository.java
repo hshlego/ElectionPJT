@@ -21,11 +21,17 @@ public class YoutubeRepository {
         em.remove(youtube);
     }
 
-    public Youtube findYoutube(Long id) {
+    public void removeAllByCandidateId(Long candidateId) {
+        em.createQuery("delete from Youtube y" +
+                        " where y.candidate.id = :candidateId")
+                .setParameter("candidateId", candidateId);
+    }
+
+    public Youtube findOne(Long id) {
         return em.find(Youtube.class, id);
     }
 
-    public List<Youtube> findYoutubeList(Long candidateId) {
+    public List<Youtube> findAllByCandidateId(Long candidateId) {
         return em.createQuery("select y from Youtube y" +
                 " where y.candidate.id = :candidateId", Youtube.class)
                 .setParameter("candidateId", candidateId)

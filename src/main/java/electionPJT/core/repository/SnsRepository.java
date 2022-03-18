@@ -17,6 +17,12 @@ public class SnsRepository {
         em.remove(sns);
     }
 
+    public void removeAllByCandidateId(Long candidateId) {
+        em.createQuery("delete from Sns s" +
+                " where s.candidate.id = :candidateId")
+                .setParameter("candidateId", candidateId);
+    }
+
     public Sns findById(Long id) {
         return em.find(Sns.class, id);
     }

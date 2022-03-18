@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,6 +21,7 @@ public class Youtube {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "candidate_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Candidate candidate;
 
     private String url;

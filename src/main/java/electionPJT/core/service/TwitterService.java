@@ -29,10 +29,10 @@ public class TwitterService {
     @Transactional
     public Long join(TwitterRequestDto twitterRequestDto) {
         Long candidateId = twitterRequestDto.getCandidateId();
-        Candidate candidate = candidateRepository.findById(candidateId);
+        Candidate candidate = candidateRepository.findOne(candidateId);
 
-        Twitter twitter = twitterRequestDto.toEntity();
-        candidate.addSns(twitter);
+        Twitter twitter = twitterRequestDto.toEntity(candidate);
+        twitterRepository.save(twitter);
 
         return twitter.getId();
     }

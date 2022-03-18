@@ -25,7 +25,7 @@ public class YoutubeService {
     @Transactional
     public Long join(YoutubeRequestDto youtubeRequestDto) {
         Long candidateId = youtubeRequestDto.getCandidateId();
-        Candidate candidate = candidateRepository.findById(candidateId);
+        Candidate candidate = candidateRepository.findOne(candidateId);
 
         Youtube youtube = youtubeRequestDto.toEntity(candidate);
         youtubeRepository.save(youtube);
@@ -35,13 +35,13 @@ public class YoutubeService {
 
     @Transactional
     public void delete(Long youtubeId) {
-        Youtube youtube = youtubeRepository.findYoutube(youtubeId);
+        Youtube youtube = youtubeRepository.findOne(youtubeId);
         youtubeRepository.remove(youtube);
     }
 
     @Transactional
     public void update(Long youtubeId, YoutubeUpdateDto youtubeUpdateDto) {
-        Youtube youtube = youtubeRepository.findYoutube(youtubeId);
+        Youtube youtube = youtubeRepository.findOne(youtubeId);
         youtube.change(
                 youtubeUpdateDto.getRuntime(),
                 youtubeUpdateDto.getViews(),
@@ -50,12 +50,12 @@ public class YoutubeService {
     }
 
     public YoutubeResponseDto findYoutube(Long youtubeId) {
-        Youtube youtube = youtubeRepository.findYoutube(youtubeId);
+        Youtube youtube = youtubeRepository.findOne(youtubeId);
         return new YoutubeResponseDto(youtube);
     }
 
     public List<YoutubeResponseDto> findYoutubeList(Long candidateId) {
-        List<Youtube> youtubeList = youtubeRepository.findYoutubeList(candidateId);
+        List<Youtube> youtubeList = youtubeRepository.findAllByCandidateId(candidateId);
         return youtubeList.stream()
                 .map(YoutubeResponseDto::new)
                 .collect(Collectors.toList());

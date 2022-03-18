@@ -5,6 +5,8 @@ import electionPJT.core.domain.City;
 import electionPJT.core.dto.candidate.CandidateRequestDto;
 import electionPJT.core.repository.CandidateRepository;
 import electionPJT.core.repository.CityRepository;
+import electionPJT.core.repository.SnsRepository;
+import electionPJT.core.repository.YoutubeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ public class CandidateService {
 
     private final CityRepository cityRepository;
     private final CandidateRepository candidateRepository;
+    private final SnsRepository snsRepository;
+    private final YoutubeRepository youtubeRepository;
 
     @Transactional
     public Long join(CandidateRequestDto candidateRequestDto) {
@@ -33,9 +37,12 @@ public class CandidateService {
 
     @Transactional
     public void delete(Long candidateId) {
-        Candidate candidate = candidateRepository.findById(candidateId);
-        validateCandidateExistence(candidate);
+        Candidate candidate = candidateRepository.findOne(candidateId);
         candidateRepository.remove(candidate);
+    }
+
+    public Candidate findCandidate(Long candidateId) {
+        return candidateRepository.findOne(candidateId);
     }
 
     public void validateDuplicateCandidate(Candidate candidate) {
@@ -44,11 +51,6 @@ public class CandidateService {
             throw new IllegalStateException("이미 존재하는 후보 번호입니다");
         }
     }
-
-    public void validateCandidateExistence(Candidate candidate) {
-        List<Candidate> candidateList = candidateRepository.findByCityAndNumber(candidate.getCity(), candidate.getNumber());
-        if(candidateList.isEmpty()) {
-            throw new IllegalStateException("후보가 존재하지 않습니다.");
-        }
-    }
 }
+
+

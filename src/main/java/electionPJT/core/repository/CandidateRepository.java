@@ -22,18 +22,18 @@ public class CandidateRepository {
         em.remove(candidate);
     }
 
-    public Candidate findById(Long id) {
+    public Candidate findOne(Long id) {
         return em.find(Candidate.class, id);
     }
 
     public List<Candidate> findAllByCity(City city) {
-        return em.createQuery("select c from Candidate c where c.city = :city")
+        return em.createQuery("select c from Candidate c where c.city = :city", Candidate.class)
                 .setParameter("city", city)
                 .getResultList();
     }
 
     public List<Candidate> findByCityAndNumber(City city, int number) {
-        return em.createQuery("select c from Candidate c where c.city = :city and c.number = :number")
+        return em.createQuery("select c from Candidate c where c.city = :city and c.number = :number", Candidate.class)
                 .setParameter("city", city)
                 .setParameter("number", number)
                 .getResultList();
