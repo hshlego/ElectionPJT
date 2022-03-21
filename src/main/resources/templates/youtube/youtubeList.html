@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <table class="table table-striped">
+            <thead> <tr>
+                <th>제목</th> <th>재생시간</th> <th>상세 설명</th> <th>업로드 날짜</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${youtubeList}">
+                <td th:text="${item.title}"></td>
+                <td th:text="${item.runtime}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.uploadDate}"></td>
+                <td>
+                    <a href="#" th:href="${item.url}" class="btn btn-primary" role="button">링크</a>
+                </td> </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

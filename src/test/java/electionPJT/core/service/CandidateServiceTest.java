@@ -5,8 +5,7 @@ import electionPJT.core.domain.City;
 import electionPJT.core.domain.District;
 import electionPJT.core.domain.Youtube;
 import electionPJT.core.domain.sns.Facebook;
-import electionPJT.core.domain.sns.Sns;
-import electionPJT.core.dto.candidate.CandidateRequestDto;
+import electionPJT.core.service.dto.candidate.CandidateRequestDto;
 import electionPJT.core.repository.CandidateRepository;
 import electionPJT.core.repository.FacebookRepository;
 import electionPJT.core.repository.SnsRepository;
@@ -15,12 +14,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,7 +45,7 @@ class CandidateServiceTest {
         candidateService.join(candidateRequestDto2);
 
         //then
-        assertEquals(2, candidateRepository.findAllByCity(city).size());
+        assertEquals(2, candidateRepository.findAllByCity(city.getId()).size());
     }
 
     public void 후보_중복_검증() throws Exception {

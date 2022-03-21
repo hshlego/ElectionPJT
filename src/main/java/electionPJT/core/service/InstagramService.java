@@ -2,9 +2,9 @@ package electionPJT.core.service;
 
 import electionPJT.core.domain.Candidate;
 import electionPJT.core.domain.sns.Instagram;
-import electionPJT.core.dto.sns.instagram.InstagramRequestDto;
-import electionPJT.core.dto.sns.instagram.InstagramResponseDto;
-import electionPJT.core.dto.sns.instagram.InstagramUpdateDto;
+import electionPJT.core.service.dto.sns.instagram.InstagramRequestDto;
+import electionPJT.core.service.dto.sns.instagram.InstagramResponseDto;
+import electionPJT.core.service.dto.sns.instagram.InstagramUpdateDto;
 import electionPJT.core.repository.CandidateRepository;
 import electionPJT.core.repository.InstagramRepository;
 import lombok.RequiredArgsConstructor;

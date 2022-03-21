@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <table class="table table-striped">
+            <thead> <tr>
+                <th>#</th> <th>본문</th> <th>업로드 날짜</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${snsList}">
+                <td th:text="${item.discriminatorValue}"></td>
+                <td th:text="${item.content}"></td>
+                <td th:text="${item.uploadDate}"></td>
+                <td>
+                    <a href="#" th:href="${item.url}" class="btn btn-primary" role="button">링크</a>
+                </td> </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+
+    <div class="jumbotron"> <h1>Welcome</h1>
+
+        <p class="lead">도시를 선택해주세요</p>
+
+        <form role="form" action="/candidates" method="get">
+            <div class="form-group">
+                <select name="cityId" id="city" class="form-control">
+                    <option value="">select your address</option>
+                    <option th:each="city : ${cities}"
+                            th:value="${city.id}"
+                            th:text="${city.SSG_2}" />
+                </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-secondary">submit</button>
+            <br>
+        </form>
+    </div>
+    <br>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->

@@ -1,15 +1,11 @@
 package electionPJT.core.service;
 
 import electionPJT.core.domain.Candidate;
-import electionPJT.core.domain.sns.Facebook;
 import electionPJT.core.domain.sns.Twitter;
-import electionPJT.core.dto.sns.facebook.FacebookRequestDto;
-import electionPJT.core.dto.sns.facebook.FacebookResponseDto;
-import electionPJT.core.dto.sns.twitter.TwitterRequestDto;
-import electionPJT.core.dto.sns.twitter.TwitterResponseDto;
-import electionPJT.core.dto.sns.twitter.TwitterUpdateDto;
+import electionPJT.core.service.dto.sns.twitter.TwitterRequestDto;
+import electionPJT.core.service.dto.sns.twitter.TwitterResponseDto;
+import electionPJT.core.service.dto.sns.twitter.TwitterUpdateDto;
 import electionPJT.core.repository.CandidateRepository;
-import electionPJT.core.repository.FacebookRepository;
 import electionPJT.core.repository.TwitterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

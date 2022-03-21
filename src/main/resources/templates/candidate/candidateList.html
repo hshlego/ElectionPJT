@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>선거 번호</th> <th>후보명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="candidate : ${candidates}">
+                    <td th:text="${candidate.number}"></td>
+                    <td th:text="${candidate.name}"></td>
+                    <td>
+                        <a href="#" th:href="@{/sns/{id} (id=${candidate.id})}" class="btn btn-primary" role="button">SNS</a>
+                    </td>
+                    <td>
+                        <a href="#" th:href="@{/youtube/{id} (id=${candidate.id})}" class="btn btn-primary" role="button">youtube</a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

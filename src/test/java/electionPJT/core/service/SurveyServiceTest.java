@@ -2,8 +2,7 @@ package electionPJT.core.service;
 
 import electionPJT.core.domain.City;
 import electionPJT.core.domain.District;
-import electionPJT.core.domain.Survey;
-import electionPJT.core.dto.survey.SurveyRequestDto;
+import electionPJT.core.service.dto.survey.SurveyRequestDto;
 import electionPJT.core.repository.CityRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional

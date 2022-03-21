@@ -2,9 +2,9 @@ package electionPJT.core.service;
 
 import electionPJT.core.domain.Candidate;
 import electionPJT.core.domain.Youtube;
-import electionPJT.core.dto.youtube.YoutubeRequestDto;
-import electionPJT.core.dto.youtube.YoutubeResponseDto;
-import electionPJT.core.dto.youtube.YoutubeUpdateDto;
+import electionPJT.core.service.dto.youtube.YoutubeRequestDto;
+import electionPJT.core.service.dto.youtube.YoutubeResponseDto;
+import electionPJT.core.service.dto.youtube.YoutubeUpdateDto;
 import electionPJT.core.repository.CandidateRepository;
 import electionPJT.core.repository.YoutubeRepository;
 import lombok.RequiredArgsConstructor;

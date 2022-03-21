@@ -26,15 +26,15 @@ public class CandidateRepository {
         return em.find(Candidate.class, id);
     }
 
-    public List<Candidate> findAllByCity(City city) {
-        return em.createQuery("select c from Candidate c where c.city = :city", Candidate.class)
-                .setParameter("city", city)
+    public List<Candidate> findAllByCity(Long cityId) {
+        return em.createQuery("select c from Candidate c where c.city.id = :cityId", Candidate.class)
+                .setParameter("cityId", cityId)
                 .getResultList();
     }
 
-    public List<Candidate> findByCityAndNumber(City city, int number) {
-        return em.createQuery("select c from Candidate c where c.city = :city and c.number = :number", Candidate.class)
-                .setParameter("city", city)
+    public List<Candidate> findByCityAndNumber(Long cityId, int number) {
+        return em.createQuery("select c from Candidate c where c.city.id = :cityId and c.number = :number", Candidate.class)
+                .setParameter("cityId", cityId)
                 .setParameter("number", number)
                 .getResultList();
     }

@@ -4,12 +4,13 @@ import electionPJT.core.domain.Candidate;
 import electionPJT.core.domain.City;
 import electionPJT.core.domain.District;
 import electionPJT.core.domain.sns.Sns;
-import electionPJT.core.dto.sns.facebook.FacebookRequestDto;
-import electionPJT.core.dto.sns.facebook.FacebookResponseDto;
-import electionPJT.core.dto.sns.facebook.FacebookUpdateDto;
-import electionPJT.core.dto.sns.instagram.InstagramRequestDto;
-import electionPJT.core.dto.sns.twitter.TwitterRequestDto;
-import electionPJT.core.dto.sns.twitter.TwitterResponseDto;
+import electionPJT.core.service.dto.sns.SnsResponseDto;
+import electionPJT.core.service.dto.sns.facebook.FacebookRequestDto;
+import electionPJT.core.service.dto.sns.facebook.FacebookResponseDto;
+import electionPJT.core.service.dto.sns.facebook.FacebookUpdateDto;
+import electionPJT.core.service.dto.sns.instagram.InstagramRequestDto;
+import electionPJT.core.service.dto.sns.twitter.TwitterRequestDto;
+import electionPJT.core.service.dto.sns.twitter.TwitterResponseDto;
 import electionPJT.core.repository.CandidateRepository;
 import electionPJT.core.repository.CityRepository;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,7 @@ public class SnsServiceTest {
         twitterService.join(twitterRequestDto);
 
         //then
-        List<Sns> snsList = snsService.findSnsList(candidate.getId());
+        List<SnsResponseDto> snsList = snsService.findSnsList(candidate.getId());
         List<TwitterResponseDto> twitterList = twitterService.findTwitterList(candidate.getId());
 
         assertEquals(3, snsList.size());

@@ -2,11 +2,13 @@ package electionPJT.core.service;
 
 import electionPJT.core.domain.City;
 import electionPJT.core.repository.CityRepository;
+import electionPJT.core.service.dto.city.CityResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -20,6 +22,18 @@ public class CityService {
         validateDuplicateCity(city);
         cityRepository.save(city);
         return city.getId();
+    }
+
+    public CityResponseDto findCity(Long id) {
+        City city = cityRepository.findOne(id);
+        return new CityResponseDto(city);
+    }
+
+    public List<CityResponseDto> findCityList() {
+        List<City> cityList = cityRepository.findAll();
+        return cityList.stream()
+                .map(CityResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     public void validateDuplicateCity(City city) {
