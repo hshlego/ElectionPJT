@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <form role="form" th:action="@{/candidates/register/{cityId} (cityId=${cityId})}" method="post">
+
+        <div class="form-group">
+            <label for="number">후보 번호</label>
+            <input type="number" name="number" class="form-control" id="number" placeholder="후보 번호를 입력하세요">
+        </div>
+
+        <div class="form-group">
+            <label for="name">후보명</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="후보 이름을 입력하세요">
+        </div>
+
+        <br/>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

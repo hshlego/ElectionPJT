@@ -20,12 +20,21 @@
                     </td>
                     <td>
                         <a href="#" th:href="@{/youtube/{id} (id=${candidate.id})}" class="btn btn-primary" role="button">youtube</a>
-
+                    </td>
+                    <td>
+                        <form role="form" th:action="@{/candidates/remove/{id} (id=${candidate.id})}" method="post">
+                            <button type="submit" class="btn btn-danger">후보 삭제</button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <div>
+            <a th:href="@{/candidates/register/{id} (id=${cityId})}" class="btn btn-link" role="button">후보 등록</a>
+        </div>
+
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
